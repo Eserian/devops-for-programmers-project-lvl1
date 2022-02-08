@@ -4,9 +4,6 @@ compose:
 compose-test:
 	docker-compose -f docker-compose.yml up --abort-on-container-exit
 
-prepare-env:
-	cp -n .env.example .env || true
-
 ci: 
-	prepare-env
+	cp -n .env.example .env || true
 	docker-compose -f docker-compose.yml up --abort-on-container-exit
