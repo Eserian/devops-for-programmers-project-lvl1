@@ -6,7 +6,7 @@ env:
 
 jobs:
   docker:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
 
     - uses: actions/checkout@v2
@@ -16,19 +16,19 @@ jobs:
 
     - name: Set up DockerHub
       uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASS }}
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASS }}
 
     - name: Build App
       uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile.production
-          cache-from: type=registry,ref=${{ env.APP_IMAGE_NAME }}:cached
-          cache-to: type=inline
-          push: true
-          tags: ${{ env.APP_IMAGE_NAME }}:cached
+      with:
+        context: .
+        file: Dockerfile.production
+        cache-from: type=registry,ref=${{ env.APP_IMAGE_NAME }}:cached
+        cache-to: type=inline
+        push: true
+        tags: ${{ env.APP_IMAGE_NAME }}:cached
 
     - name: Check
       run: |
